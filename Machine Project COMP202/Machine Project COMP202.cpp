@@ -2,7 +2,7 @@
 #include <conio.h>
 #include <iomanip>
 #include <time.h>
-#define w 9
+#define w 11
 #define x 30
 #define y 4
 using namespace std;
@@ -103,6 +103,7 @@ int main()
 {
 	int EXAM[x][y];
 	float FG[x] = { 0 }, EGcount[9] = { 0 }, EG[x];
+
 	srand(time(NULL));
 
 	cout << "Class Record" << endl << endl;
@@ -115,7 +116,6 @@ int main()
 		{
 			getEXAM(r, c, EXAM);
 			computeFG(r, c, FG, EXAM);
-			
 		}
 	}
 
