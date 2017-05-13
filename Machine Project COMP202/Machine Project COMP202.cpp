@@ -284,145 +284,159 @@ int main()
 {
 	int EXAM[x][y], sortedEXAM[x][y], mode[y] = { 0 }, countMode[y] = { 0 }, EGcount[10] = { 0 };
 	float FG[x] = { 0 }, sortedFG[x] = { 0 }, EG[x], sortedEG[x] = { 0 }, mean[y] = { 0 }, median[y] = { 0 }, SD[y] = { 0 }, meanFG = 0;
+	char choice;
 
 	srand(time(NULL));
 
-	cout << "Class Record" << endl << endl;
-
-	cout << setw(w) << left << "Student#" << setw(w) << "Exam 1" << setw(w) << "Exam 2" << setw(w) << "Exam 3" << setw(w) << "Exam 4" << setw(w) << "FG" << "EQ" << endl;
-
-	for (int r = 0; r < 30; r++)
+	do
 	{
+		cout << "**********************************************************************" << endl;
+		cout << setw(w) << left << "Class Record" << endl << endl << setfill(' ');
+
+		cout << setw(w) << left << "Student#" << setw(w) << "Exam 1" << setw(w) << "Exam 2" << setw(w) << "Exam 3" << setw(w) << "Exam 4" << setw(w) << "FG" << "EQ" << endl;
+
+		for (int r = 0; r < 30; r++)
+		{
+			for (int c = 0; c < 4; c++)
+			{
+				getEXAM(r, c, EXAM);
+				computeFG(r, c, FG, EXAM);
+			}
+		}
+
+		for (int r = 0; r < 30; r++)
+		{
+			FG[r] /= y;
+			for (int c = 0; c < 4; c++)
+			{
+				computeEG(r, FG, EG);
+			}
+		}
+		displayEXAM(EXAM, FG, EG);
+
+		for (int r = 0; r < 30; r++) //Loop to copy all EXAM[x][y] to sortedEXAM[x][y]
+		{
+			for (int c = 0; c < 4; c++)
+			{
+				sortedEXAM[r][c] = EXAM[r][c];
+			}
+		}
+
+		//Loop to copy all FG[y] to sortedFG[y]
+		for (int r = 0; r < 30; r++)
+		{
+			sortedFG[r] = FG[r];
+		}
+
+
+		//Loop to copy all EG[y] to sortedEG[y]
+		for (int r = 0; r < 30; r++)
+		{
+			sortedEG[r] = EG[r];
+		}
+
+		cout << endl;
+
+		sortEXAM(sortedEXAM, x);
+		sortSTAT(sortedFG, x);
+		sortSTAT(sortedEG, x);
+
+		/* remove this comment to see the sorted exam
+		cout << "Sorted:" << endl;
+		displaySorted(sortedEXAM, sortedFG, sortedEG); */
+
+		computeMEAN(mean, sortedEXAM);
+		computeMEDIAN(median, sortedEXAM);
+		computeMODE(mode, sortedEXAM, x);
+		computeSD(sortedEXAM, mean, SD);
+
+		for (int r = 0; r < 30; r++) //Get Mean of FG
+		{
+			meanFG += sortedFG[r];
+		}
+		meanFG /= x;
+
+		cout << endl;
+
+		cout << setw(w) << left << "Mean: ";
 		for (int c = 0; c < 4; c++)
 		{
-			getEXAM(r, c, EXAM);
-			computeFG(r, c, FG, EXAM);
+			cout << setw(w) << mean[c];
 		}
-	}
+		cout << meanFG << endl;
 
-	for (int r = 0; r < 30; r++)
-	{
-		FG[r] /= y;
+		cout << setw(w) << left << "Median: ";
 		for (int c = 0; c < 4; c++)
 		{
-			computeEG(r, FG, EG);
+			cout << setw(w) << median[c];
 		}
-	}
-	displayEXAM(EXAM, FG, EG);
 
-	for (int r = 0; r < 30; r++) //Loop to copy all EXAM[x][y] to sortedEXAM[x][y]
-	{
+		cout << (sortedFG[(x - 2) / 2] + sortedFG[x / 2]) / 2.0 << endl;
+
+		cout << setw(w) << left << "Modes: " << setw(w);
 		for (int c = 0; c < 4; c++)
 		{
-			sortedEXAM[r][c] = EXAM[r][c];
+			if (mode[c] != 0)
+			{
+				cout << setw(w) << mode[c];
+			}
+
+			else
+			{
+				cout << setw(w) << "NONE";
+			}
 		}
-	}
 
-	//Loop to copy all FG[y] to sortedFG[y]
-	for (int r = 0; r < 30; r++)
-	{
-		sortedFG[r] = FG[r];
-	}
+		cout << endl;
 
-
-	//Loop to copy all EG[y] to sortedEG[y]
-	for (int r = 0; r < 30; r++)
-	{
-		sortedEG[r] = EG[r];
-	}
-
-	cout << endl;
-
-	sortEXAM(sortedEXAM, x);
-	sortSTAT(sortedFG, x);
-	sortSTAT(sortedEG, x);
-	cout << "Sorted:" << endl;
-	displaySorted(sortedEXAM, sortedFG, sortedEG);
-
-	computeMEAN(mean, sortedEXAM);
-	computeMEDIAN(median, sortedEXAM);
-	computeMODE(mode, sortedEXAM, x);
-	computeSD(sortedEXAM, mean, SD);
-
-	for (int r = 0; r < 30; r++) //Get Mean of FG
-	{
-		meanFG += sortedFG[r];
-	}
-	meanFG /= x;
-
-	cout << endl;
-
-	cout << setw(w) << left << "Mean: ";
-	for (int c = 0; c < 4; c++)
-	{
-		cout << setw(w) << mean[c];
-	}
-	cout << meanFG << endl;
-
-	cout << setw(w) << left << "Median: ";
-	for (int c = 0; c < 4; c++)
-	{
-		cout << setw(w) << median[c];
-	}
-
-	cout << (sortedFG[(x - 2) / 2] + sortedFG[x / 2]) / 2.0 << endl;
-
-	cout << setw(w) << left << "Modes: " << setw(w);
-	for (int c = 0; c < 4; c++)
-	{
-		if (mode[c] != 0)
+		cout << setw(w) << left << "SD: ";
+		for (int c = 0; c < 4; c++)
 		{
-			cout << setw(w) << mode[c];
+			cout << setw(w) << SD[c];
 		}
 
-		else
+		cout << endl << endl << endl;
+
+		cout << setw(w) << left << "MAX: ";
+
+		for (int c = 0; c < 4; c++)
 		{
-			cout << setw(w) << "NONE";
+			cout << setw(w) << sortedEXAM[x - 1][c];
 		}
-	}
 
-	cout << endl;
+		cout << sortedFG[x - 1] << endl;
 
-	cout << setw(w) << left << "SD: ";
-	for (int c = 0; c < 4; c++)
-	{
-		cout << setw(w) << SD[c];
-	}
+		cout << setw(w) << left << "MIN: ";
+		for (int c = 0; c < 4; c++)
+		{
+			cout << setw(w) << sortedEXAM[0][c];
+		}
 
-	cout << endl;
-	cout << endl;
+		cout << sortedFG[0] << endl << endl << endl;
 
-	cout << setw(w) << left << "MAX: ";
+		cout << "Table of Frequency - EQ" << endl;
 
-	for (int c = 0; c < 4; c++)
-	{
-		cout << setw(w) << sortedEXAM[x - 1][c];
-	}
+		computeEGcount(EGcount, sortedFG);
+		cout << "1.0 - " << EGcount[0] << endl;
+		cout << "1.25 - " << EGcount[1] << endl;
+		cout << "1.50 - " << EGcount[2] << endl;
+		cout << "1.75 - " << EGcount[3] << endl;
+		cout << "2.0 - " << EGcount[4] << endl;
+		cout << "2.25 - " << EGcount[5] << endl;
+		cout << "2.50 - " << EGcount[6] << endl;
+		cout << "2.75 - " << EGcount[7] << endl;
+		cout << "3.00 - " << EGcount[8] << endl;
+		cout << "5.00 - " << EGcount[9] << endl;
 
-	cout << sortedFG[x - 1] << endl;
+		cout << endl;
 
-	cout << setw(w) << left << "MIN: ";
-	for (int c = 0; c < 4; c++)
-	{
-		cout << setw(w) << sortedEXAM[0][c];
-	}
+		cout << "Do you want to repeat the program? Press y: "; cin >> choice;
 
-	cout << sortedFG[0] << endl << endl;
-
-	cout << "Table of Frequency - EQ" << endl;
-
-	computeEGcount(EGcount, sortedFG);
-	cout << "1.0 - " << EGcount[0] << endl;
-	cout << "1.25 - " << EGcount[1] << endl;
-	cout << "1.50 - " << EGcount[2] << endl;
-	cout << "1.75 - " << EGcount[3] << endl;
-	cout << "2.0 - " << EGcount[4] << endl;
-	cout << "2.25 - " << EGcount[5] << endl;
-	cout << "2.50 - " << EGcount[6] << endl;
-	cout << "2.75 - " << EGcount[7] << endl;
-	cout << "3.00 - " << EGcount[8] << endl;
-	cout << "5.00 - " << EGcount[9] << endl;
+		cout << endl;
+	}while (choice == 'Y' || choice == 'y');
 
 	_getch();
 	return 0;
+
+
 }
