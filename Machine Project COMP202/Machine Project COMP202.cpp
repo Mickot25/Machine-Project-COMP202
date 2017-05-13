@@ -282,14 +282,15 @@ void computeSD(int sortedEXAM[x][y], float mean[y], float SD[y])
 
 int main()
 {
-	int EXAM[x][y], sortedEXAM[x][y], mode[y] = { 0 }, countMode[y] = { 0 }, EGcount[10] = { 0 };
-	float FG[x] = { 0 }, sortedFG[x] = { 0 }, EG[x], sortedEG[x] = { 0 }, mean[y] = { 0 }, median[y] = { 0 }, SD[y] = { 0 }, meanFG = 0;
 	char choice;
-
-	srand(time(NULL));
-
 	do
 	{
+		int EXAM[x][y], sortedEXAM[x][y], mode[y] = { 0 }, countMode[y] = { 0 }, EGcount[10] = { 0 };
+		float FG[x] = { 0 }, sortedFG[x] = { 0 }, EG[x], sortedEG[x] = { 0 }, mean[y] = { 0 }, median[y] = { 0 }, SD[y] = { 0 }, meanFG = 0;
+
+
+		srand(time(NULL));
+
 		cout << "**********************************************************************" << endl;
 		cout << setw(w) << left << "Class Record" << endl << endl << setfill(' ');
 
@@ -433,10 +434,10 @@ int main()
 		cout << "Do you want to repeat the program? Press y: "; cin >> choice;
 
 		cout << endl;
-	}while (choice == 'Y' || choice == 'y');
+	} while (choice == 'Y' || choice == 'y');
 
 	_getch();
 	return 0;
-
-
 }
+
+
