@@ -3,11 +3,12 @@
 #include <iomanip>
 #include <time.h>
 #include <math.h>
-#define w 11 //Number to determine the table width
-#define x 30 //Number to determine number of students
-#define y 4 //Number to determine number of exams
+#define w 11 //Number to determine the table width (to easily adjust the table width)
+#define x 30 //Number to determine number of students (to easily edit the number of students)
+#define y 4 //Number to determine number of exams (to easily edit the number of exams)
 using namespace std;
 
+//All functions were called first before int main so that there is no need for prototypes
 int getEXAM(int r, int c, int EXAM[x][y])
 {
 	return EXAM[r][c] = 50 + rand() % 51;
@@ -163,14 +164,14 @@ void displayEXAM(int EXAM[x][y], float FG[y], float EG[x])
 
 void swapper(int&array1, int&array2)
 {
-	int temp = array1;
+	float temp = array1;
 	array1 = array2;
 	array2 = temp;
 }
 
 void statswapper(float&array1, float&array2)
 {
-	int temp = array1;
+	float temp = array1;
 	array1 = array2;
 	array2 = temp;
 }
@@ -350,11 +351,11 @@ int main()
 
 		displayEXAM(EXAM, FG, EG); //Function to display the Exam, Final Grade and Equivalent Grade
 
-		/*
-		remove this comment to see the SORTED exam
+		
+		//remove this comment to see the SORTED exam
 		cout << "Sorted:" << endl;
 		displaySorted(sortedEXAM, sortedFG, sortedEG);
-		*/
+		
 
 		for (int r = 0; r < x; r++) //Get Mean of FG
 		{
