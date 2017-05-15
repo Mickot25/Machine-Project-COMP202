@@ -3,9 +3,9 @@
 #include <iomanip>
 #include <time.h>
 #include <math.h>
-#define w 11
-#define x 30
-#define y 4
+#define w 11 //Number to determine the table width
+#define x 30 //Number to determine number of students
+#define y 4 //Number to determine number of exams
 using namespace std;
 
 int getEXAM(int r, int c, int EXAM[x][y])
@@ -77,7 +77,7 @@ float computeEG(int r, float FG[x], float EG[x])
 
 void computeEGcount(int EGcount[10], float sortedFG[x])
 {
-	for (int r = 0; r < 30; r++)
+	for (int r = 0; r < x; r++)
 	{
 		if (sortedFG[10] >= 96.0 && sortedFG[r] <= 100.0)
 		{
@@ -101,7 +101,7 @@ void computeEGcount(int EGcount[10], float sortedFG[x])
 
 		else if (sortedFG[r] >= 87.0 && sortedFG[r] < 89.0)
 		{
-			EGcount[4]++;
+			EGcount[y]++;
 		}
 
 		else if (sortedFG[r] >= 84.0 && sortedFG[r] < 87.0)
@@ -133,11 +133,11 @@ void computeEGcount(int EGcount[10], float sortedFG[x])
 
 void displaySorted(int EXAM[x][y], float FG[y], float EG[x])
 {
-	for (int r= 0; r < 30; r++)
+	for (int r= 0; r < x; r++)
 	{
 		cout << setw(w) << r + 1 << setw(w);
 
-		for (int c = 0; c < 4; c++)
+		for (int c = 0; c < y; c++)
 		{
 			cout << EXAM[r][c] << setw(w);
 		}
@@ -148,11 +148,11 @@ void displaySorted(int EXAM[x][y], float FG[y], float EG[x])
 
 void displayEXAM(int EXAM[x][y], float FG[y], float EG[x])
 {
-	for (int r = 0; r < 30; r++)
+	for (int r = 0; r < x; r++)
 	{
 		cout << setw(w) << r + 1 << setw(w);
 
-		for (int c = 0; c < 4; c++)
+		for (int c = 0; c < y; c++)
 		{
 			cout << EXAM[r][c] << setw(w);
 		}
@@ -177,7 +177,7 @@ void statswapper(float&array1, float&array2)
 
 void sortEXAM(int sortedEXAM[x][y], int sizeofarray)
 {
-	for (int c = 0; c < 4; c++) //switch to the next column
+	for (int c = 0; c < y; c++) //switch to the next column
 	{
 		for (int r = 0; r < sizeofarray - 1; r++) //to compare numbers up to the number of arrays
 		{
@@ -205,9 +205,9 @@ void sortSTAT(float sortedSTAT[x], int sizeofarray)
 
 void computeMEAN(float mean[y], int sortedEXAM[x][y])
 {
-	for (int c = 0; c < 4; c++)
+	for (int c = 0; c < y; c++)
 	{
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
 			mean[c] += sortedEXAM[r][c];
 		}
@@ -219,7 +219,7 @@ void computeMEDIAN(float median[y], int sortedEXAM[x][y])
 {
 	if (x % 2 != 0)
 	{
-		for (int c = 0; c < 4; c++)
+		for (int c = 0; c < y; c++)
 		{
 			median[c] = sortedEXAM[(x + 1) / 2][c];
 		}
@@ -227,7 +227,7 @@ void computeMEDIAN(float median[y], int sortedEXAM[x][y])
 
 	else
 	{
-		for (int c = 0; c < 4; c++)
+		for (int c = 0; c < y; c++)
 		{
 			median[c] = (sortedEXAM[(x - 2) / 2][c] + sortedEXAM[x / 2][c]) / 2.0;
 		}
@@ -239,7 +239,7 @@ void computeMODE(int mode[y], int sortedEXAM[x][y], int sizeofarray)
 {
 	int modecount1;
 	int modecount2;
-	for (int c = 0; c < 4; c++) //switch to the next column
+	for (int c = 0; c < y; c++) //switch to the next column
 	{
 		modecount1 = 0;
 		modecount2 = 1;
@@ -269,9 +269,9 @@ void computeMODE(int mode[y], int sortedEXAM[x][y], int sizeofarray)
 
 void computeSD(int sortedEXAM[x][y], float mean[y], float SD[y])
 {
-	for (int c = 0; c < 4; c++)
+	for (int c = 0; c < y; c++)
 	{
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
 			SD[c] += pow(sortedEXAM[r][c] - mean[c], 2);
 		}
@@ -285,53 +285,54 @@ int main()
 	char choice;
 	do
 	{
+		//Initialization of all arrays and variables
 		int EXAM[x][y], sortedEXAM[x][y], mode[y] = { 0 }, countMode[y] = { 0 }, EGcount[10] = { 0 };
 		float FG[x] = { 0 }, sortedFG[x] = { 0 }, EG[x], sortedEG[x] = { 0 }, mean[y] = { 0 }, median[y] = { 0 }, SD[y] = { 0 }, meanFG = 0;
 
 
-		srand(time(NULL));
+		srand(time(NULL)); //To generate a new set of random numbers
 
 		cout << "**********************************************************************" << endl;
 		cout << setw(w) << left << "Class Record" << endl << endl << setfill(' ');
 
 		cout << setw(w) << left << "Student#" << setw(w) << "Exam 1" << setw(w) << "Exam 2" << setw(w) << "Exam 3" << setw(w) << "Exam 4" << setw(w) << "FG" << "EQ" << endl;
 
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
-			for (int c = 0; c < 4; c++)
+			for (int c = 0; c < y; c++)
 			{
 				getEXAM(r, c, EXAM);
 				computeFG(r, c, FG, EXAM);
 			}
 		}
 
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
 			FG[r] /= y;
-			for (int c = 0; c < 4; c++)
+			for (int c = 0; c < y; c++)
 			{
 				computeEG(r, FG, EG);
 			}
 		}
-		displayEXAM(EXAM, FG, EG);
 
-		for (int r = 0; r < 30; r++) //Loop to copy all EXAM[x][y] to sortedEXAM[x][y]
+		//Loop to copy all EXAM[x][y] to sortedEXAM[x][y]
+		for (int r = 0; r < x; r++) 
 		{
-			for (int c = 0; c < 4; c++)
+			for (int c = 0; c < y; c++)
 			{
 				sortedEXAM[r][c] = EXAM[r][c];
 			}
 		}
 
 		//Loop to copy all FG[y] to sortedFG[y]
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
 			sortedFG[r] = FG[r];
 		}
 
 
 		//Loop to copy all EG[y] to sortedEG[y]
-		for (int r = 0; r < 30; r++)
+		for (int r = 0; r < x; r++)
 		{
 			sortedEG[r] = EG[r];
 		}
@@ -342,16 +343,20 @@ int main()
 		sortSTAT(sortedFG, x);
 		sortSTAT(sortedEG, x);
 
-		/* remove this comment to see the sorted exam
-		cout << "Sorted:" << endl;
-		displaySorted(sortedEXAM, sortedFG, sortedEG); */
-
 		computeMEAN(mean, sortedEXAM);
 		computeMEDIAN(median, sortedEXAM);
 		computeMODE(mode, sortedEXAM, x);
 		computeSD(sortedEXAM, mean, SD);
 
-		for (int r = 0; r < 30; r++) //Get Mean of FG
+		displayEXAM(EXAM, FG, EG); //Function to display the Exam, Final Grade and Equivalent Grade
+
+		/*
+		remove this comment to see the SORTED exam
+		cout << "Sorted:" << endl;
+		displaySorted(sortedEXAM, sortedFG, sortedEG);
+		*/
+
+		for (int r = 0; r < x; r++) //Get Mean of FG
 		{
 			meanFG += sortedFG[r];
 		}
@@ -359,23 +364,23 @@ int main()
 
 		cout << endl;
 
-		cout << setw(w) << left << "Mean: ";
-		for (int c = 0; c < 4; c++)
+		cout << setw(w) << left << "Mean: "; //Display Mean of each Exam
+		for (int c = 0; c < y; c++)
 		{
 			cout << setw(w) << mean[c];
 		}
-		cout << meanFG << endl;
+		cout << meanFG << endl; //Display mean of FG
 
-		cout << setw(w) << left << "Median: ";
-		for (int c = 0; c < 4; c++)
+		cout << setw(w) << left << "Median: "; //Display Median of each Exam
+		for (int c = 0; c < y; c++)
 		{
 			cout << setw(w) << median[c];
 		}
 
-		cout << (sortedFG[(x - 2) / 2] + sortedFG[x / 2]) / 2.0 << endl;
+		cout << (sortedFG[(x - 2) / 2] + sortedFG[x / 2]) / 2.0 << endl; //Display Median of FG
 
-		cout << setw(w) << left << "Modes: " << setw(w);
-		for (int c = 0; c < 4; c++)
+		cout << setw(w) << left << "Modes: " << setw(w); //Display Modes of each Exam
+		for (int c = 0; c < y; c++)
 		{
 			if (mode[c] != 0)
 			{
@@ -390,34 +395,35 @@ int main()
 
 		cout << endl;
 
-		cout << setw(w) << left << "SD: ";
-		for (int c = 0; c < 4; c++)
+		cout << setw(w) << left << "SD: "; //Display Standard Deviation of each Exam
+		for (int c = 0; c < y; c++)
 		{
 			cout << setw(w) << SD[c];
 		}
 
 		cout << endl << endl << endl;
 
-		cout << setw(w) << left << "MAX: ";
+		cout << setw(w) << left << "MAX: "; //Display Max of each Exam
 
-		for (int c = 0; c < 4; c++)
+		for (int c = 0; c < y; c++)
 		{
 			cout << setw(w) << sortedEXAM[x - 1][c];
 		}
 
-		cout << sortedFG[x - 1] << endl;
+		cout << sortedFG[x - 1] << endl; //Display Max of FG
 
-		cout << setw(w) << left << "MIN: ";
-		for (int c = 0; c < 4; c++)
+		cout << setw(w) << left << "MIN: "; //Display Min of each Exam
+		for (int c = 0; c < y; c++)
 		{
 			cout << setw(w) << sortedEXAM[0][c];
 		}
 
-		cout << sortedFG[0] << endl << endl << endl;
+		cout << sortedFG[0] << endl << endl << endl; //Display Min of FG
 
-		cout << "Table of Frequency - EQ" << endl;
+		cout << "Table of Frequency - EQ" << endl; //Display Table of Frequency
 
 		computeEGcount(EGcount, sortedFG);
+	
 		cout << "1.0 - " << EGcount[0] << endl;
 		cout << "1.25 - " << EGcount[1] << endl;
 		cout << "1.50 - " << EGcount[2] << endl;
@@ -431,7 +437,7 @@ int main()
 
 		cout << endl;
 
-		cout << "Do you want to repeat the program? Press y: "; cin >> choice;
+		cout << "Do you want to repeat the program? Press y: "; cin >> choice; //User choice to repeat the program
 
 		cout << endl;
 	} while (choice == 'Y' || choice == 'y');
