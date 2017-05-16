@@ -189,11 +189,11 @@ void sortEXAM(int sortedEXAM[x][y])
 	}
 }
 
-void sortSTAT(float sortedSTAT[x], int sizeofarray)
+void sortSTAT(float sortedSTAT[x])
 {
-	for (int r = 0; r < sizeofarray - 1; r++) //to compare numbers up to the number of arrays
+	for (int r = 0; r < x - 1; r++) //to compare numbers up to the number of arrays
 	{
-		for (int j = 0; j < sizeofarray - r - 1; j++)
+		for (int j = 0; j < x - r - 1; j++)
 		{
 			if (sortedSTAT[j] > sortedSTAT[j + 1])
 				statswapper(sortedSTAT[j], sortedSTAT[j + 1]);
@@ -335,8 +335,8 @@ int main()
 		cout << endl;
 
 		sortEXAM(sortedEXAM);
-		sortSTAT(sortedFG, x);
-		sortSTAT(sortedEG, x);
+		sortSTAT(sortedFG);
+		sortSTAT(sortedEG);
 
 		computeMEAN(mean, sortedEXAM);
 		computeMEDIAN(median, sortedEXAM);
