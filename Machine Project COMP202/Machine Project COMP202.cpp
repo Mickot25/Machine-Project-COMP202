@@ -349,10 +349,10 @@ int main()
 
 		displayEXAM(EXAM, FG, EG); //Function to display the Exam, Final Grade and Equivalent Grade
 
-		
+		/*
 		//remove this comment to see the SORTED exam
 		cout << "Sorted:" << endl;
-		displaySorted(sortedEXAM, sortedFG, sortedEG);
+		displaySorted(sortedEXAM, sortedFG, sortedEG);*/
 		
 
 		for (int r = 0; r < x; r++) //Get Mean of FG
