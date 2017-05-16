@@ -144,7 +144,6 @@ void displaySorted(int EXAM[x][y], float FG[y], float EG[x])
 		}
 		cout << fixed << setprecision(2) << FG[r] << setw(w) << EG[r] << endl;
 	}
-	
 }
 
 void displayEXAM(int EXAM[x][y], float FG[y], float EG[x])
@@ -159,7 +158,6 @@ void displayEXAM(int EXAM[x][y], float FG[y], float EG[x])
 		}
 		cout << fixed << setprecision(2) << FG[r] << setw(w) << EG[r] << endl;
 	}
-
 }
 
 void swapper(int&array1, int&array2)
@@ -233,7 +231,6 @@ void computeMEDIAN(float median[y], int sortedEXAM[x][y])
 			median[c] = (sortedEXAM[(x - 2) / 2][c] + sortedEXAM[x / 2][c]) / 2.0;
 		}
 	}
-
 }
 
 void computeMODE(int mode[y], int sortedEXAM[x][y], int sizeofarray)
@@ -329,7 +326,6 @@ int main()
 			sortedFG[r] = FG[r];
 		}
 
-
 		//Loop to copy all EG[y] to sortedEG[y]
 		for (int r = 0; r < x; r++)
 		{
@@ -353,12 +349,12 @@ int main()
 		//remove this comment to see the SORTED exam
 		cout << "Sorted:" << endl;
 		displaySorted(sortedEXAM, sortedFG, sortedEG);*/
-		
 
 		for (int r = 0; r < x; r++) //Get Mean of FG
 		{
 			meanFG += sortedFG[r];
 		}
+
 		meanFG /= x;
 
 		cout << endl;
