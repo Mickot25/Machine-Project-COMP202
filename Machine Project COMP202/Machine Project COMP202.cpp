@@ -4,7 +4,7 @@
 #include <time.h>
 #include <math.h>
 #define w 11 //Number to determine the table width (to easily adjust the table width)
-#define x 30 //Number to determine number of students (to easily edit the number of students)
+#define x 100 //Number to determine number of students (to easily edit the number of students)
 #define y 4 //Number to determine number of exams (to easily edit the number of exams)
 using namespace std;
 
@@ -289,7 +289,6 @@ int main()
 		//Initialization of all arrays and variables
 		int EXAM[x][y], sortedEXAM[x][y], mode[y] = { 0 }, countMode[y] = { 0 }, EGcount[10] = { 0 };
 		float FG[x] = { 0 }, sortedFG[x] = { 0 }, EG[x], sortedEG[x] = { 0 }, mean[y] = { 0 }, median[y] = { 0 }, SD[y] = { 0 }, meanFG = 0;
-
 
 		srand(time(NULL)); //To generate a new set of random numbers
 
