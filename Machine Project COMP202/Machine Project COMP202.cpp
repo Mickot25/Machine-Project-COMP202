@@ -280,6 +280,7 @@ void computeSD(int sortedEXAM[x][y], float mean[y], float SD[y])
 
 int main()
 {
+	cout << "Program by:" << endl << "Acierto, Gregory Lance A; Bassig, Alberto Nicole V; Contreras, Michael R." << endl << "Section: 2-3" << endl << endl;
 	char choice;
 	do
 	{
