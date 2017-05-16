@@ -16,7 +16,7 @@ int getEXAM(int r, int c, int EXAM[x][y])
 
 float computeFG(int r, int c, float FG[x], int EXAM[x][y])
 {
-	FG[r] += EXAM[r][c];
+	FG[r] = 0.20 * EXAM[r][0] + 0.30 * EXAM[r][1] + 0.25 * EXAM[r][2] + 0.25 * EXAM[r][3];
 	return FG[r];
 }
 
@@ -309,7 +309,6 @@ int main()
 
 		for (int r = 0; r < x; r++)
 		{
-			FG[r] /= y;
 			for (int c = 0; c < y; c++)
 			{
 				computeEG(r, FG, EG);
@@ -351,10 +350,10 @@ int main()
 
 		displayEXAM(EXAM, FG, EG); //Function to display the Exam, Final Grade and Equivalent Grade
 
-		
+		/*
 		//remove this comment to see the SORTED exam
 		cout << "Sorted:" << endl;
-		displaySorted(sortedEXAM, sortedFG, sortedEG);
+		displaySorted(sortedEXAM, sortedFG, sortedEG);*/
 		
 
 		for (int r = 0; r < x; r++) //Get Mean of FG
