@@ -4,7 +4,7 @@
 #include <time.h>
 #include <math.h>
 #define w 11 //Number to determine the table width (to easily adjust the table width)
-#define x 100 //Number to determine number of students (to easily edit the number of students)
+#define x 30 //Number to determine number of students (to easily edit the number of students)
 #define y 4 //Number to determine number of exams (to easily edit the number of exams)
 using namespace std;
 
@@ -176,13 +176,13 @@ void statswapper(float&array1, float&array2)
 	array2 = temp;
 }
 
-void sortEXAM(int sortedEXAM[x][y], int sizeofarray)
+void sortEXAM(int sortedEXAM[x][y])
 {
 	for (int c = 0; c < y; c++) //switch to the next column
 	{
-		for (int r = 0; r < sizeofarray - 1; r++) //to compare numbers up to the number of arrays
+		for (int r = 0; r < x - 1; r++) //to compare numbers up to the number of arrays
 		{
-			for (int j = 0; j < sizeofarray - r - 1; j++)
+			for (int j = 0; j < x - r - 1; j++)
 			{
 				if (sortedEXAM[j][c] > sortedEXAM[j + 1][c])
 					swapper(sortedEXAM[j][c], sortedEXAM[j + 1][c]);
@@ -338,7 +338,7 @@ int main()
 
 		cout << endl;
 
-		sortEXAM(sortedEXAM, x);
+		sortEXAM(sortedEXAM);
 		sortSTAT(sortedFG, x);
 		sortSTAT(sortedEG, x);
 
@@ -349,10 +349,10 @@ int main()
 
 		displayEXAM(EXAM, FG, EG); //Function to display the Exam, Final Grade and Equivalent Grade
 
-		/*
+		
 		//remove this comment to see the SORTED exam
 		cout << "Sorted:" << endl;
-		displaySorted(sortedEXAM, sortedFG, sortedEG);*/
+		displaySorted(sortedEXAM, sortedFG, sortedEG);
 		
 
 		for (int r = 0; r < x; r++) //Get Mean of FG
